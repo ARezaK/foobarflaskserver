@@ -1,0 +1,32 @@
+
+{% block head %}
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+{% endblock %}
+{% block body %}
+<br>
+
+<a href="{{ url_for('jumpforward') }}">    jump forward</a>
+    <br>
+    <br>
+<a href="{{ url_for('jumpbackward') }}">jump backward </a>
+
+    <br>    <br>
+    <br>
+<a href="{{ url_for('playnext') }}">play next</a>
+
+    <br>    <br>
+    <br>
+<a href="{{ url_for('changetrackanddeletecurrentone') }}">Change track and delete current one</a>
+    <br>    <br>
+    <br>
+
+<a href="{{ url_for('change_trackandadd_tomusicdirectorythen_delete') }}">add to music directory and delte</a>
+    <br>
+    <br>
+    <br>
+
+
+
+{% endblock %}
