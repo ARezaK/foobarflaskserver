@@ -41,7 +41,7 @@ class fooBar():
 
         time.sleep(0.5)
         shell.SendKeys("{DELETE}") # Delete selected text?  Depends on context. :P
-        time.sleep(0.5)
+        time.sleep(2)
         shell.SendKeys("{ENTER}") # Delete selected text?  Depends on context. :P
 
 
@@ -71,7 +71,7 @@ class fooBar():
         shell.SendKeys("m") # Delete selected text?  Depends on context. :P
         time.sleep(0.5)
         shell.SendKeys("{DELETE}") # Delete selected text?  Depends on context. :P
-        time.sleep(0.5)
+        time.sleep(3)
         shell.SendKeys("{ENTER}") # Delete selected text?  Depends on context. :P
 
 
@@ -96,7 +96,7 @@ class fooBar():
     def stop(self):
            playback.Stop()
 
-    def pauseplay(self):
+    def pause(self):
            playback.Pause()
 
     def isPaused(self):
@@ -209,7 +209,17 @@ app.jinja_env.add_extension('jinja2.ext.loopcontrols')
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    global playback
+    pythoncom.CoInitialize()
+
+    ProgID = "Foobar2000.Application.0.7"
+    foobar_COM_object = win32com.client.Dispatch(ProgID)
+    playback = foobar_COM_object.Playback
+    f = fooBar()
+
+    song = f.getCurrentTrack()
+    position = f.seekPosition()
+    return render_template('index.html', song = song, position = position)
 
 @app.route('/jumpforward')
 def jumpforward():
@@ -277,6 +287,18 @@ def playnext():
     f.next()
     return redirect(url_for('index'))
 
+@app.route('/pause')
+def pause():
+    global playback
+    pythoncom.CoInitialize()
+
+    ProgID = "Foobar2000.Application.0.7"
+    foobar_COM_object = win32com.client.Dispatch(ProgID)
+    playback = foobar_COM_object.Playback
+    f = fooBar()
+
+    f.pause()
+    return redirect(url_for('index'))
 ##END ROUTING
 
 
