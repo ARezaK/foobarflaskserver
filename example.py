@@ -1,29 +1,14 @@
 # -*- coding: utf-8 -*-
-import urllib
-import time
-import re
 import os
-import datetime
-from threading import Thread
-import random
-import json
-import inspect
-import urllib
 import time
-import decimal
-import pickle
 import pywinauto
 import win32com.client
-from flask import Flask, render_template, request, g, session, flash, \
-    redirect, url_for, abort, jsonify, make_response
-from openid.extensions import pape
-from flask.ext.script import Manager, Command
+from flask import Flask, render_template, redirect, url_for
+from flask.ext.script import Manager
 import pythoncom
 
 
 shell = win32com.client.Dispatch("WScript.Shell")
-
-
 
 
 
